@@ -6,21 +6,8 @@ using System.Threading;
 
 namespace NEmplode.Tool
 {
-    class EmpegFinder
+    static class Program
     {
-        class StateObject
-        {
-            public readonly Socket Socket;
-            public readonly byte[] ResponseBytes;
-            public const int ResponseBufferSize = 1024;
-
-            public StateObject(Socket socket)
-            {
-                Socket = socket;
-                ResponseBytes = new byte[ResponseBufferSize];
-            }
-        };
-
         [STAThread]
         static void Main(string[] args)
         {
