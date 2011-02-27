@@ -29,24 +29,16 @@ namespace NEmplode.Tool
 
             byte[] requestBytes = new byte[] { 0x3F }; // Single '?'
 
-            using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
+            var localEndPoint = new IPEndPoint(IPAddress.Any, empegDiscoveryPort);
+            using (UdpClient client = new UdpClient(localEndPoint))
             {
-                var localEndPoint = new IPEndPoint(IPAddress.Any, empegDiscoveryPort);
-                socket.Bind(localEndPoint);
-
-                socket.SetSocketOption(SocketOptionLevel.Socket,
-                                  SocketOptionName.Broadcast, 1);
+                client.EnableBroadcast = true;
 
                 var remoteEndPoint = new IPEndPoint(IPAddress.Broadcast, empegDiscoveryPort);
                 Console.WriteLine("Looking for empegs on {0}...", remoteEndPoint);
-                socket.SendTo(requestBytes, remoteEndPoint);
+                client.Send(requestBytes, requestBytes.Length, remoteEndPoint);
 
-                StateObject so = new StateObject(socket);
-                EndPoint ep = new IPEndPoint(0, 0);
-                socket.BeginReceiveFrom(so.ResponseBytes, 0,
-                                   StateObject.ResponseBufferSize, 0,
-                                   ref ep,
-                                   ResponseCallback, so);
+                client.BeginReceive(ResponseCallback, client);
 
                 // Then wait for 5s.
                 Thread.Sleep(5000);
@@ -55,20 +47,19 @@ namespace NEmplode.Tool
 
         public static void ResponseCallback(IAsyncResult ar)
         {
-            StateObject so = (StateObject)ar.AsyncState;
-            Socket client = so.Socket;
+            UdpClient client = (UdpClient)ar.AsyncState;
 
-            EndPoint ep = new IPEndPoint(IPAddress.Any, 0);
-            int responseBytesReceived = client.EndReceiveFrom(ar, ref ep);
+            IPEndPoint ep = new IPEndPoint(IPAddress.Any, 0);
+            byte[] bytesReceived = client.EndReceive(ar, ref ep);
 
             Console.WriteLine("Received response from {0}", ep);
 
-            string responseString = Encoding.ASCII.GetString(so.ResponseBytes, 0, responseBytesReceived);
+            string responseString = Encoding.ASCII.GetString(bytesReceived);
 
             Console.WriteLine("Response contains: {0}", responseString);
 
             // Issue another BeginReceiveFrom
-            client.BeginReceiveFrom(so.ResponseBytes, 0, StateObject.ResponseBufferSize, 0, ref ep, ResponseCallback, so);
+            client.BeginReceive(ResponseCallback, client);
         }
     }
 }
