@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEmplode", "Src\NEmplode\NEmplode.csproj", "{67A732AE-9B33-40E2-A00A-AB88C9579E39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEmplode.Core", "Src\NEmplode.Core\NEmplode.Core.csproj", "{1DD86FBD-ECA2-4355-87D4-CB260AA0E546}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEmplode.Discovery", "Src\NEmplode.Tool\NEmplode.Discovery.csproj", "{F62A8F68-EDCC-4887-BB8D-DEEE4409CF22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEmplode.Tool", "Src\NEmplode.Tool\NEmplode.Tool.csproj", "{F62A8F68-EDCC-4887-BB8D-DEEE4409CF22}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Spikes", "Spikes", "{D5804BEF-F1EA-4305-87FA-EA73E7A988A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,16 +27,6 @@ Global
 		{67A732AE-9B33-40E2-A00A-AB88C9579E39}.Release|Mixed Platforms.Build.0 = Release|x86
 		{67A732AE-9B33-40E2-A00A-AB88C9579E39}.Release|x86.ActiveCfg = Release|x86
 		{67A732AE-9B33-40E2-A00A-AB88C9579E39}.Release|x86.Build.0 = Release|x86
-		{1DD86FBD-ECA2-4355-87D4-CB260AA0E546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1DD86FBD-ECA2-4355-87D4-CB260AA0E546}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1DD86FBD-ECA2-4355-87D4-CB260AA0E546}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{1DD86FBD-ECA2-4355-87D4-CB260AA0E546}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{1DD86FBD-ECA2-4355-87D4-CB260AA0E546}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{1DD86FBD-ECA2-4355-87D4-CB260AA0E546}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1DD86FBD-ECA2-4355-87D4-CB260AA0E546}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1DD86FBD-ECA2-4355-87D4-CB260AA0E546}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{1DD86FBD-ECA2-4355-87D4-CB260AA0E546}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{1DD86FBD-ECA2-4355-87D4-CB260AA0E546}.Release|x86.ActiveCfg = Release|Any CPU
 		{F62A8F68-EDCC-4887-BB8D-DEEE4409CF22}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{F62A8F68-EDCC-4887-BB8D-DEEE4409CF22}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{F62A8F68-EDCC-4887-BB8D-DEEE4409CF22}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -50,5 +40,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F62A8F68-EDCC-4887-BB8D-DEEE4409CF22} = {D5804BEF-F1EA-4305-87FA-EA73E7A988A1}
 	EndGlobalSection
 EndGlobal

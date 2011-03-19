@@ -92,12 +92,6 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NEmplode.Core\NEmplode.Core.csproj">
-      <Project>{1DD86FBD-ECA2-4355-87D4-CB260AA0E546}</Project>
-      <Name>NEmplode.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

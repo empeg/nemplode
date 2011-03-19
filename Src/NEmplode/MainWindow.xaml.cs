@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 
 namespace NEmplode
 {
@@ -8,23 +7,6 @@ namespace NEmplode
         public MainWindow()
         {
             InitializeComponent();
-
-            MainWindowViewModel viewModel = new MainWindowViewModel();
-            DataContext = viewModel;
         }
-    }
-
-    public class MainWindowViewModel
-    {
-        public MainWindowViewModel()
-        {
-            MediaLibraries = new ObservableCollection<MediaLibrary>();
-        }
-
-        public ObservableCollection<MediaLibrary> MediaLibraries { get; private set; }
-    }
-
-    public class MediaLibrary
-    {
     }
 }
