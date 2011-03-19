@@ -1,9 +1,7 @@
-﻿<Window x:Class="NEmplode.MainWindow"
+﻿<Window x:Class="NEmplode.Shell"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <ListBox ItemsSource="{Binding Path=MediaLibraries}">
-        </ListBox>
+    <Grid x:Name="LayoutRoot">
     </Grid>
 </Window>
