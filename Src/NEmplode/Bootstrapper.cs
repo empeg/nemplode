@@ -2,6 +2,8 @@
 using System.Windows;
 using Microsoft.Practices.Prism.MefExtensions;
 using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.Prism.Regions;
+using NEmplode.Behaviors;
 
 namespace NEmplode
 {
@@ -30,6 +32,13 @@ namespace NEmplode
         protected override IModuleCatalog CreateModuleCatalog()
         {
             return new ConfigurationModuleCatalog();
+        }
+
+        protected override IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
+        {
+            var factory = base.ConfigureDefaultRegionBehaviors();
+            factory.AddIfMissing("AutoPopulateExportedViewsBehavior", typeof(AutoPopulateExportedViewsBehavior));
+            return factory;
         }
     }
 }

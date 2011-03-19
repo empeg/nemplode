@@ -68,7 +68,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
+    <Compile Include="Behaviors\IViewRegionRegistration.cs" />
+    <Compile Include="ResultView.xaml.cs">
+      <DependentUpon>ResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScopeView.xaml.cs">
+      <DependentUpon>ScopeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShellViewModel.cs" />
+    <Compile Include="Behaviors\ViewExportAttribute.cs" />
+    <Page Include="ResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScopeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
