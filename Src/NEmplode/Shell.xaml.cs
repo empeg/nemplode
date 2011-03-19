@@ -10,5 +10,11 @@ namespace NEmplode
         {
             InitializeComponent();
         }
+
+        [Import]
+        ShellViewModel ViewModel
+        {
+            set { DataContext = value; }
+        }
     }
 }

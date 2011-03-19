@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEmplode", "Src\NEmplode\NEmplode.csproj", "{67A732AE-9B33-40E2-A00A-AB88C9579E39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEmplode.Discovery", "Src\NEmplode.Tool\NEmplode.Discovery.csproj", "{F62A8F68-EDCC-4887-BB8D-DEEE4409CF22}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Spikes", "Spikes", "{D5804BEF-F1EA-4305-87FA-EA73E7A988A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEmplode.Discovery", "Src\Spikes\NEmplode.Discovery\NEmplode.Discovery.csproj", "{F62A8F68-EDCC-4887-BB8D-DEEE4409CF22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NEmplode.Download", "Src\Spikes\NEmplode.Download\NEmplode.Download.csproj", "{3AF0CA62-894D-44FE-AA2F-4389B6283790}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,11 +39,22 @@ Global
 		{F62A8F68-EDCC-4887-BB8D-DEEE4409CF22}.Release|Mixed Platforms.Build.0 = Release|x86
 		{F62A8F68-EDCC-4887-BB8D-DEEE4409CF22}.Release|x86.ActiveCfg = Release|x86
 		{F62A8F68-EDCC-4887-BB8D-DEEE4409CF22}.Release|x86.Build.0 = Release|x86
+		{3AF0CA62-894D-44FE-AA2F-4389B6283790}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{3AF0CA62-894D-44FE-AA2F-4389B6283790}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{3AF0CA62-894D-44FE-AA2F-4389B6283790}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{3AF0CA62-894D-44FE-AA2F-4389B6283790}.Debug|x86.ActiveCfg = Debug|x86
+		{3AF0CA62-894D-44FE-AA2F-4389B6283790}.Debug|x86.Build.0 = Debug|x86
+		{3AF0CA62-894D-44FE-AA2F-4389B6283790}.Release|Any CPU.ActiveCfg = Release|x86
+		{3AF0CA62-894D-44FE-AA2F-4389B6283790}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{3AF0CA62-894D-44FE-AA2F-4389B6283790}.Release|Mixed Platforms.Build.0 = Release|x86
+		{3AF0CA62-894D-44FE-AA2F-4389B6283790}.Release|x86.ActiveCfg = Release|x86
+		{3AF0CA62-894D-44FE-AA2F-4389B6283790}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F62A8F68-EDCC-4887-BB8D-DEEE4409CF22} = {D5804BEF-F1EA-4305-87FA-EA73E7A988A1}
+		{3AF0CA62-894D-44FE-AA2F-4389B6283790} = {D5804BEF-F1EA-4305-87FA-EA73E7A988A1}
 	EndGlobalSection
 EndGlobal
