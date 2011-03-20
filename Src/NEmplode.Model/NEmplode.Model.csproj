@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FolderItemExtensions.cs" />
     <Compile Include="FolderPath.cs" />
     <Compile Include="IFolderPath.cs" />
     <Compile Include="IMediaLibrary.cs" />

@@ -16,7 +16,7 @@ namespace NEmplode.Model
 
         public void Set(IFolderItem folderItem)
         {
-            var path = GetPath(folderItem);
+            var path = folderItem.GetPath();
             var prefix = _components.CommonPrefix(path, (x, y) => x.Id == y.Id).ToArray();
 
             // If there's no change, don't bother.
@@ -33,22 +33,6 @@ namespace NEmplode.Model
                 Changed(this, new FolderPathChangedEventArgs { Top = Top });
 
             OnPropertyChanged("Top");
-        }
-
-        private static List<IFolderItem> GetPath(IFolderItem folderItem)
-        {
-            var path = new List<IFolderItem>();
-            PushAncestors(path, folderItem);
-            return path;
-        }
-
-        private static void PushAncestors(IList<IFolderItem> components, IFolderItem folderItem)
-        {
-            if (folderItem == null)
-                return;
-
-            PushAncestors(components, folderItem.Parent);
-            components.Add(folderItem);
         }
 
         public IFolderItem Top
