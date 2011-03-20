@@ -76,8 +76,9 @@
     <Compile Include="Behaviors\IViewRegionRegistration.cs" />
     <Compile Include="FakeFolderItem.cs" />
     <Compile Include="FakeMediaLibrary.cs" />
-    <Compile Include="ResultPane.xaml.cs">
-      <DependentUpon>ResultPane.xaml</DependentUpon>
+    <Compile Include="FolderItemSelectedEvent.cs" />
+    <Compile Include="DefaultResultPane.xaml.cs">
+      <DependentUpon>DefaultResultPane.xaml</DependentUpon>
     </Compile>
     <Compile Include="ScopeItemViewModel.cs" />
     <Compile Include="ScopePane.xaml.cs">
@@ -86,7 +87,7 @@
     <Compile Include="ScopePaneViewModel.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Compile Include="Behaviors\ViewExportAttribute.cs" />
-    <Page Include="ResultPane.xaml">
+    <Page Include="DefaultResultPane.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

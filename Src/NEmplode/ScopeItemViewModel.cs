@@ -14,13 +14,14 @@ namespace NEmplode
 
         private readonly ScopeItemViewModel _parent;
         private readonly IFolderItem _folderItem;
+        private readonly IFolderPath _folderPath;
 
         private bool _isSelected;
         private bool _isExpanded;
         private ICollection<ScopeItemViewModel> _children;
         private readonly ReadOnlyContinuousCollection<ScopeItemViewModel> _realChildren;
 
-        public ScopeItemViewModel(ScopeItemViewModel parent, IFolderItem folderItem)
+        public ScopeItemViewModel(ScopeItemViewModel parent, IFolderItem folderItem, IFolderPath folderPath)
         {
             // parent can be null.
             _parent = parent;
@@ -30,9 +31,13 @@ namespace NEmplode
 
             _folderItem = folderItem;
 
-            // TODO: Use the WeakPropertyChangedEventHandler to bind to some interesting properties on the IFolderItem.
+            if (folderPath == null)
+                throw new ArgumentNullException("folderPath");
 
-            _realChildren = _folderItem.Children.Select(x => new ScopeItemViewModel(this, x));
+            _folderPath = folderPath;
+
+            // TODO: Use the WeakPropertyChangedEventHandler (in CLINQ) to bind to some interesting properties on the IFolderItem?
+            _realChildren = _folderItem.Children.Select(x => new ScopeItemViewModel(this, x, folderPath));
 
             // If it can contain folders, but we don't know what they are yet, put a fake child in.
             if (_folderItem.CanContainFolders && _realChildren.Count == 0)
@@ -62,12 +67,16 @@ namespace NEmplode
         public bool IsSelected
         {
             get { return _isSelected; }
-            set {
+            set
+            {
                 if (_isSelected == value)
                     return;
 
                 _isSelected = value;
                 OnPropertyChanged("IsSelected");
+
+                if (_isSelected)
+                    _folderPath.Set(_folderItem);
             }
         }
 

@@ -10,11 +10,17 @@ namespace NEmplode
     public class ScopePaneViewModel
     {
         [ImportingConstructor]
-        public ScopePaneViewModel(IMediaLibrary mediaLibrary)
+        public ScopePaneViewModel(IMediaLibrary mediaLibrary, IFolderPath folderPath)
         {
             // TODO: Use Continuous Linq for this?
             RootFolders = new ObservableCollection<ScopeItemViewModel>();
-            RootFolders.AddRange(mediaLibrary.RootFolders.Select(x => new ScopeItemViewModel(null, x)));
+            RootFolders.AddRange(mediaLibrary.RootFolders.Select(x => new ScopeItemViewModel(null, x, folderPath)));
+
+            if (RootFolders.Count != 0)
+            {
+                RootFolders[0].IsSelected = true;
+                RootFolders[0].IsExpanded = true;
+            }
         }
 
         public ObservableCollection<ScopeItemViewModel> RootFolders { get; set; }

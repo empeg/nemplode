@@ -10,9 +10,19 @@ namespace NEmplode.Model
     public interface IFolderItem
     {
         /// <summary>
+        /// The parent of this item. Can be null.
+        /// </summary>
+        IFolderItem Parent { get; }
+
+        /// <summary>
         /// Human-readable text for this item.
         /// </summary>
         string Name { get; }
+
+        /// <summary>
+        /// Parseable text for this item. Must be unique relative to its siblings.
+        /// </summary>
+        string Id { get; }
 
         /// <summary>
         /// Returns the children of this item -- the items contained in this folder.

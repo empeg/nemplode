@@ -4,6 +4,7 @@ using Microsoft.Practices.Prism.MefExtensions;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using NEmplode.Behaviors;
+using NEmplode.Model;
 
 namespace NEmplode
 {
@@ -27,6 +28,7 @@ namespace NEmplode
             base.ConfigureAggregateCatalog();
 
             AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(Bootstrapper).Assembly));
+            AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(FolderPath).Assembly));
         }
 
         protected override IModuleCatalog CreateModuleCatalog()
