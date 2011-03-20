@@ -16,26 +16,30 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ContinuousLinq">
+      <HintPath>..\..\Ext\CLINQ2.2.0.1\ContinuousLinq.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Prism">
       <HintPath>..\..\Ext\Prism\Bin\Desktop\Microsoft.Practices.Prism.dll</HintPath>
     </Reference>
@@ -70,19 +74,23 @@
     </ApplicationDefinition>
     <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
     <Compile Include="Behaviors\IViewRegionRegistration.cs" />
-    <Compile Include="ResultView.xaml.cs">
-      <DependentUpon>ResultView.xaml</DependentUpon>
+    <Compile Include="FakeFolderItem.cs" />
+    <Compile Include="FakeMediaLibrary.cs" />
+    <Compile Include="ResultPane.xaml.cs">
+      <DependentUpon>ResultPane.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ScopeView.xaml.cs">
-      <DependentUpon>ScopeView.xaml</DependentUpon>
+    <Compile Include="ScopeItemViewModel.cs" />
+    <Compile Include="ScopePane.xaml.cs">
+      <DependentUpon>ScopePane.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ScopePaneViewModel.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Compile Include="Behaviors\ViewExportAttribute.cs" />
-    <Page Include="ResultView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="ResultPane.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="ScopeView.xaml">
+    <Page Include="ScopePane.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,6 +131,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NEmplode.Model\NEmplode.Model.csproj">
+      <Project>{C3B64AF0-022B-4F91-AAB3-391433926709}</Project>
+      <Name>NEmplode.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

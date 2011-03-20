@@ -6,9 +6,9 @@ namespace NEmplode
 {
     [ViewExport(RegionName = "ResultRegion")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class ResultView : UserControl
+    public partial class ResultPane : UserControl
     {
-        public ResultView()
+        public ResultPane()
         {
             InitializeComponent();
         }

@@ -15,6 +15,7 @@ namespace NEmplode
         ShellViewModel ViewModel
         {
             set { DataContext = value; }
+            get { return (ShellViewModel)DataContext; }
         }
     }
 }

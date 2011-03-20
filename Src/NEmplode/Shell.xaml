@@ -8,20 +8,13 @@
         </Grid.ColumnDefinitions>
 
         <ItemsControl x:Name="ScopeRegion" Grid.Column="0" cal:RegionManager.RegionName="ScopeRegion">
-            <ItemsControl.Background>
-                <LinearGradientBrush>
-                    <GradientStop Color="White" Offset="0"/>
-                    <GradientStop Color="Beige" Offset="1" />
-                </LinearGradientBrush>
-            </ItemsControl.Background>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ItemsControl x:Name="ResultRegion" Grid.Column="1" cal:RegionManager.RegionName="ResultRegion">
-            <ItemsControl.Background>
-                <LinearGradientBrush>
-                    <GradientStop Color="White" Offset="0"/>
-                    <GradientStop Color="Beige" Offset="1" />
-                </LinearGradientBrush>
-            </ItemsControl.Background>
-        </ItemsControl>
+        
+        <ItemsControl x:Name="ResultRegion" Grid.Column="1" cal:RegionManager.RegionName="ResultRegion" />
     </Grid>
 </Window>

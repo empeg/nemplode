@@ -6,11 +6,18 @@ namespace NEmplode
 {
     [ViewExport(RegionName = "ScopeRegion")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class ScopeView : UserControl
+    public partial class ScopePane : UserControl
     {
-        public ScopeView()
+        public ScopePane()
         {
             InitializeComponent();
+        }
+
+        [Import]
+        public ScopePaneViewModel ViewModel
+        {
+            set { DataContext = value; }
+            get { return (ScopePaneViewModel)DataContext; }
         }
     }
 }
