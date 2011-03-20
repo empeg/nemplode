@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.Practices.Prism;
 using NEmplode.Model;

@@ -87,16 +87,20 @@ namespace NEmplode.Download
             string type;
             if (dictionary.TryGetValue("type", out type))
             {
-                if (type == "playlist")
-                    item = new PlaylistItem(id);
-                else if (type == "tune")
-                    item = new TuneItem(id);
-                else if (type == "illegal")
+                switch (type)
                 {
-                    // Ignore it.
+                    case "playlist":
+                        item = new PlaylistItem(id);
+                        break;
+                    case "tune":
+                        item = new TuneItem(id);
+                        break;
+                    case "illegal":
+                        // ignore it.
+                        break;
+                    default:
+                        throw new Exception(string.Format("Unrecognised type: {0}", dictionary["type"]));
                 }
-                else
-                    throw new Exception(string.Format("Unrecognised type: {0}", dictionary["type"]));
             }
 
             if (item != null)

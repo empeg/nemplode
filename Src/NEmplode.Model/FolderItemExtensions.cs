@@ -11,7 +11,7 @@ namespace NEmplode.Model
             return path;
         }
 
-        private static void PushAncestors(IFolderItem folderItem, IList<IFolderItem> components)
+        private static void PushAncestors(IFolderItem folderItem, ICollection<IFolderItem> components)
         {
             if (folderItem == null)
                 return;
