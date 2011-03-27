@@ -18,7 +18,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -27,7 +27,7 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -55,6 +55,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity">
+      <HintPath>..\..\Ext\Prism\Lib\Desktop\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -74,22 +77,27 @@
     </ApplicationDefinition>
     <Compile Include="Behaviors\AutoPopulateExportedViewsBehavior.cs" />
     <Compile Include="Behaviors\IViewRegionRegistration.cs" />
-    <Compile Include="FakeFolderItem.cs" />
-    <Compile Include="FakeMediaLibrary.cs" />
+    <Compile Include="Views\DefaultResultView.xaml.cs">
+      <DependentUpon>DefaultResultView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FolderItemSelectedEvent.cs" />
-    <Compile Include="ResultPane.xaml.cs">
+    <Compile Include="Panes\Result\ResultPane.xaml.cs">
       <DependentUpon>ResultPane.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ResultPaneContentTemplateSelector.cs" />
-    <Compile Include="ResultPaneViewModel.cs" />
-    <Compile Include="ScopeItemViewModel.cs" />
-    <Compile Include="ScopePane.xaml.cs">
+    <Compile Include="Panes\Result\ResultPaneContentTemplateSelector.cs" />
+    <Compile Include="Panes\Result\ResultPaneViewModel.cs" />
+    <Compile Include="Panes\Scope\ScopeItemViewModel.cs" />
+    <Compile Include="Panes\Scope\ScopePane.xaml.cs">
       <DependentUpon>ScopePane.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ScopePaneViewModel.cs" />
+    <Compile Include="Panes\Scope\ScopePaneViewModel.cs" />
     <Compile Include="ShellViewModel.cs" />
     <Compile Include="Behaviors\ViewExportAttribute.cs" />
-    <Page Include="ResultPane.xaml">
+    <Page Include="Views\DefaultResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Panes\Result\ResultPane.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -97,7 +105,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ScopePane.xaml">
+    <Page Include="Panes\Scope\ScopePane.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.Practices.Prism;
 using NEmplode.Model;
 
-namespace NEmplode
+namespace NEmplode.Panes.Scope
 {
     [Export]
     public class ScopePaneViewModel
@@ -12,7 +12,6 @@ namespace NEmplode
         [ImportingConstructor]
         public ScopePaneViewModel(IMediaLibrary mediaLibrary, IFolderPath folderPath)
         {
-            // TODO: Use Continuous Linq for this?
             RootFolders = new ObservableCollection<ScopeItemViewModel>();
             RootFolders.AddRange(mediaLibrary.RootFolders.Select(x => new ScopeItemViewModel(null, x, folderPath)));
 

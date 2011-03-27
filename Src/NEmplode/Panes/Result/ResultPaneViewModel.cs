@@ -2,7 +2,7 @@
 using System.ComponentModel.Composition;
 using Microsoft.Practices.Prism.Events;
 
-namespace NEmplode
+namespace NEmplode.Panes.Result
 {
     [Export]
     public class ResultPaneViewModel : INotifyPropertyChanged
@@ -15,6 +15,7 @@ namespace NEmplode
             eventAggregator.GetEvent<FolderItemSelectedEvent>().Subscribe(
                 folderItem =>
                     {
+                        folderItem.RealizeChildren();
                         Content = folderItem;
                     });
         }

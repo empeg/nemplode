@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using NEmplode.Model;
 
-namespace NEmplode
+namespace NEmplode.Panes.Result
 {
     public class ResultPaneContentTemplateSelector : DataTemplateSelector
     {

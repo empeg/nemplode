@@ -2,22 +2,22 @@
 using System.Windows.Controls;
 using NEmplode.Behaviors;
 
-namespace NEmplode
+namespace NEmplode.Panes.Result
 {
-    [ViewExport(RegionName = "ScopeRegion")]
+    [ViewExport(RegionName = "ResultRegion")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class ScopePane : UserControl
+    public partial class ResultPane : UserControl
     {
-        public ScopePane()
+        public ResultPane()
         {
             InitializeComponent();
         }
 
         [Import]
-        public ScopePaneViewModel ViewModel
+        public ResultPaneViewModel ViewModel
         {
             set { DataContext = value; }
-            get { return (ScopePaneViewModel)DataContext; }
+            get { return (ResultPaneViewModel)DataContext; }
         }
     }
 }

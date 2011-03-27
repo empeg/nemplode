@@ -5,7 +5,7 @@ using System.ComponentModel;
 using ContinuousLinq;
 using NEmplode.Model;
 
-namespace NEmplode
+namespace NEmplode.Panes.Scope
 {
     public class ScopeItemViewModel : INotifyPropertyChanged
     {
