@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:NEmplode="clr-namespace:NEmplode" xmlns:Views="clr-namespace:NEmplode.Views" x:Class="NEmplode.d__projects_nemplode_src_nemplode_resulttemplates_xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:Views="clr-namespace:NEmplode.Views">
     <DataTemplate x:Key="DefaultResultView">
         <Views:DefaultResultView />
     </DataTemplate>

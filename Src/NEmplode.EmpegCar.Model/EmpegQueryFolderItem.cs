@@ -1,12 +1,23 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Microsoft.Practices.Prism;
+using NEmplode.EmpegCar.Model.Database;
 using NEmplode.Model;
 
 namespace NEmplode.EmpegCar.Model
 {
     public class EmpegQueryFolderItem : IFolderItem
     {
-        public EmpegQueryFolderItem(IFolderItem parent, string name)
+        private readonly MediaDatabase _database;
+        private readonly Func<ItemBase, string> _selector;
+        private readonly ObservableCollection<IFolderItem> _children = new ObservableCollection<IFolderItem>();
+
+        public EmpegQueryFolderItem(IFolderItem parent, MediaDatabase database, string name, Func<ItemBase, string> selector)
         {
+            _database = database;
+            _selector = selector;
+
             Parent = parent;
             Name = name;
         }
@@ -15,6 +26,11 @@ namespace NEmplode.EmpegCar.Model
 
         public string Name { get; private set; }
 
+        public string SortKey
+        {
+            get { return Name; }
+        }
+
         public string Id
         {
             get { return Name; }
@@ -22,7 +38,7 @@ namespace NEmplode.EmpegCar.Model
 
         public ObservableCollection<IFolderItem> Children
         {
-            get { return new ObservableCollection<IFolderItem>(); }
+            get { return _children; }
         }
 
         public bool CanContainFolders
@@ -32,7 +48,14 @@ namespace NEmplode.EmpegCar.Model
 
         public void RealizeChildren()
         {
-            // Do nothing.
+            var childNames = _database.Items
+                .Select(i => _selector(i))
+                .Distinct()
+                .ToList();
+
+            Children.AddRange(childNames
+                .Select(x => new EmpegResultFolderItem(this, x))
+                .Cast<IFolderItem>());
         }
     }
 }

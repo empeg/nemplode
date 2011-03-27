@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using ContinuousLinq;
+using ContinuousLinq.WeakEvents;
 using NEmplode.Model;
 
 namespace NEmplode.Panes.Scope
@@ -38,6 +39,8 @@ namespace NEmplode.Panes.Scope
 
             // TODO: Use the WeakPropertyChangedEventHandler (in CLINQ) to bind to some interesting properties on the IFolderItem?
             _realChildren = _folderItem.Children.Select(x => new ScopeItemViewModel(this, x, folderPath));
+            //_folderItem.Children.CollectionChanged += (sender, e) => { Children = _realChildren; };
+            //_realChildren.CollectionChanged += (sender, e) => { Children = _realChildren; };
 
             // If it can contain folders, but we don't know what they are yet, put a fake child in.
             if (_folderItem.CanContainFolders && _realChildren.Count == 0)

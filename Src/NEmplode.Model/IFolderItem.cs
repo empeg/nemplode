@@ -20,6 +20,12 @@ namespace NEmplode.Model
         string Name { get; }
 
         /// <summary>
+        /// Something to sort by. Not necessarily the name.
+        /// TODO: Do we need to return an IComparer or a Comparison instead?
+        /// </summary>
+        string SortKey { get; }
+
+        /// <summary>
         /// Parseable text for this item. Must be unique relative to its siblings.
         /// </summary>
         string Id { get; }
