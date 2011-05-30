@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
 using NEmplode.EmpegCar.Discovery;
 
 namespace NEmplode.Discovery
@@ -11,28 +10,22 @@ namespace NEmplode.Discovery
         [STAThread]
         static void Main(string[] args)
         {
-            Trace.Listeners.Add(new ConsoleTraceListener() { TraceOutputOptions = TraceOptions.DateTime | TraceOptions.ProcessId | TraceOptions.ThreadId });
+            Trace.Listeners.Add(new ConsoleTraceListener()
+                                    { TraceOutputOptions = TraceOptions.DateTime | TraceOptions.ProcessId | TraceOptions.ThreadId });
 
-            TaskScheduler.UnobservedTaskException += (sender, e) => Console.WriteLine(e.Exception);
+            TimeSpan discoveryInterval = TimeSpan.FromSeconds(5);
+            var empegs = EmpegObservable.Create(discoveryInterval);
             
-            var finder = new NetworkBroadcastEmpegCarFinder();
-
-            // It's designed to be used asynchronously. That is: you'll receive events when an empeg is found or lost.
-            finder.FoundEmpeg +=(sender, e) => Console.WriteLine("Found empeg-car {0}", e.Locator);
-            finder.LostEmpeg += (sender, e) => Console.WriteLine("Lost empeg-car {0}", e.Locator);
-
             ManualResetEvent stop = new ManualResetEvent(false);
-            Console.CancelKeyPress += (sender, e) => 
+            Console.CancelKeyPress += (sender, e) =>
                                           {
                                               Console.WriteLine("^C");
                                               stop.Set();
                                           };
 
-            finder.Start();
+            empegs.Subscribe(Console.WriteLine);
 
             stop.WaitOne();
-
-            finder.Dispose();
         }
     }
 }
