@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Text;
 
 namespace NEmplode.EmpegCar.Model.Database
 {
-    internal class HijackDatabaseReader
+    internal class DatabaseReader : IEmpegDatabaseReader
     {
         private static readonly Dictionary<string, Action<ItemBase, string>> _setters;
 
-        static HijackDatabaseReader()
+        static DatabaseReader()
         {
             _setters = new Dictionary<string, Action<ItemBase, string>>();
             _setters["type"] = (i, value) => { /* do nothing. */ };
@@ -32,30 +31,32 @@ namespace NEmplode.EmpegCar.Model.Database
             _setters["year"] = (i, value) => i.Year = Convert.ToInt32(value);
         }
 
-        private readonly Uri _empegUri;
+        private readonly IEmpegDatabaseProvider _databaseProvider;
 
-        public HijackDatabaseReader(Uri empegUri)
+        public DatabaseReader(IEmpegDatabaseProvider databaseProvider)
         {
-            _empegUri = empegUri;
+            _databaseProvider = databaseProvider;
         }
 
         public MediaDatabase ReadDatabase()
         {
-            WebClient client = new WebClient();
+            byte[] tagsBytes = _databaseProvider.DownloadTags();
 
-            string[] tags = DownloadTags(client);
-            List<ItemBase> items = ReadDatabase(client, tags);
+            // The 'tags' file is ASCII, LF line-endings.
+            var tagsString = Encoding.ASCII.GetString(tagsBytes);
+            var tags = tagsString.Split('\n');
 
-            var playlistsBytes = client.DownloadData(_empegUri + "/empeg/var/playlists");
+            List<ItemBase> items = ReadDatabase(tags);
+
+            var playlistsBytes = _databaseProvider.DownloadPlaylists();
 
             // TODO: Put the playlist children in the items.
             return new MediaDatabase(tags, items);
         }
 
-        private List<ItemBase> ReadDatabase(WebClient client, string[] tags)
+        private List<ItemBase> ReadDatabase(string[] tags)
         {
-            // TODO: If this file doesn't exist, try the /empeg/var/database file. In fact, we should probably figure out what version of the player you're using. Interesting problem.
-            var databaseBytes = client.DownloadData(_empegUri + "/empeg/var/database3");
+            var databaseBytes = _databaseProvider.DownloadDatabase();
             var databaseStream = new MemoryStream(databaseBytes);
 
             // TODO: Figure this out from the database version.
@@ -79,7 +80,7 @@ namespace NEmplode.EmpegCar.Model.Database
             return items;
         }
 
-        private ItemBase BuildItem(int id, Dictionary<string, string> dictionary)
+        private static ItemBase BuildItem(int id, Dictionary<string, string> dictionary)
         {
             // OK. We've got the item. Turn it into something a bit more domain-specific.
             // TODO: Items with id >= 0x100 are required to have a valid type. We should probably enforce that.
@@ -141,15 +142,6 @@ namespace NEmplode.EmpegCar.Model.Database
             }
 
             return dictionary;
-        }
-
-        private string[] DownloadTags(WebClient client)
-        {
-            var tagsBytes = client.DownloadData(_empegUri + "/empeg/var/tags");
-
-            // The 'tags' file is ASCII, LF line-endings.
-            var tagsString = Encoding.ASCII.GetString(tagsBytes);
-            return tagsString.Split('\n');
         }
 
         private static TimeSpan ParseDuration(string value)

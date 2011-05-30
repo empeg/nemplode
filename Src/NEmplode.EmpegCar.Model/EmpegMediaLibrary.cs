@@ -15,7 +15,7 @@ namespace NEmplode.EmpegCar.Model
         {
             Uri baseUri = new Uri("http://10.0.0.99/");
 
-            var reader = new HijackDatabaseReader(baseUri);
+            IEmpegDatabaseReader reader = new DatabaseReader(new HijackDatabaseProvider(baseUri));
             _database = reader.ReadDatabase();
         }
 

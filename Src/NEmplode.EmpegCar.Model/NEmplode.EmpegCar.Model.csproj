@@ -43,7 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\HijackDatabaseReader.cs" />
+    <Compile Include="Database\HijackDatabaseProvider.cs" />
+    <Compile Include="Database\DatabaseReader.cs" />
+    <Compile Include="Database\IEmpegDatabaseProvider.cs" />
+    <Compile Include="Database\IEmpegDatabaseReader.cs" />
     <Compile Include="Database\ItemBase.cs" />
     <Compile Include="Database\MediaDatabase.cs" />
     <Compile Include="Database\PlaylistItem.cs" />
