@@ -42,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\DatabaseItem.cs" />
+    <Compile Include="Database\EmpegCarDatabase.cs" />
+    <Compile Include="Database\EmpegCarDatabaseReader.cs" />
+    <Compile Include="Database\Sources\HijackDatabaseSource.cs" />
+    <Compile Include="Database\Sources\IEmpegCarDatabaseSource.cs" />
     <Compile Include="Discovery\EmpegLocator.cs" />
     <Compile Include="Discovery\EmpegObservable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

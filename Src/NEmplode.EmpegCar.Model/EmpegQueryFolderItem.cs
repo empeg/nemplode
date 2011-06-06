@@ -2,18 +2,18 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using Microsoft.Practices.Prism;
-using NEmplode.EmpegCar.Model.Database;
+using NEmplode.EmpegCar.Database;
 using NEmplode.Model;
 
 namespace NEmplode.EmpegCar.Model
 {
     public class EmpegQueryFolderItem : IFolderItem
     {
-        private readonly MediaDatabase _database;
-        private readonly Func<ItemBase, string> _selector;
+        private readonly EmpegCarDatabase _database;
+        private readonly Func<DatabaseItem, string> _selector;
         private readonly ObservableCollection<IFolderItem> _children = new ObservableCollection<IFolderItem>();
 
-        public EmpegQueryFolderItem(IFolderItem parent, MediaDatabase database, string name, Func<ItemBase, string> selector)
+        public EmpegQueryFolderItem(IFolderItem parent, EmpegCarDatabase database, string name, Func<DatabaseItem, string> selector)
         {
             _database = database;
             _selector = selector;

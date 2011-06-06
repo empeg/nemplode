@@ -45,13 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HijackDatabaseReader.cs" />
-    <Compile Include="ItemBase.cs" />
-    <Compile Include="MediaDatabase.cs" />
-    <Compile Include="PlaylistItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TuneItem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\NEmplode.Core\NEmplode.Core.csproj">
+      <Project>{96C3A2F7-E1F5-4967-ADE9-03AED20CE121}</Project>
+      <Name>NEmplode.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\NEmplode.EmpegCar\NEmplode.EmpegCar.csproj">
+      <Project>{0B9D48FA-1B66-4A5E-80EC-F091FD55EFD8}</Project>
+      <Name>NEmplode.EmpegCar</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

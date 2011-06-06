@@ -1,4 +1,6 @@
 ﻿using System;
+using NEmplode.EmpegCar.Database;
+using NEmplode.EmpegCar.Database.Sources;
 
 namespace NEmplode.Download
 {
@@ -6,10 +8,23 @@ namespace NEmplode.Download
     {
         static void Main(string[] args)
         {
-            Uri baseUri = new Uri("http://10.0.0.99/");
+            // TODO: Invent EmpegCarDatabaseSource.Create() factory method.
+            string uriString = string.Format("http://{0}/", args[0]);
+            Uri baseUri = new Uri(uriString);
 
-            var reader = new HijackDatabaseReader(baseUri);
+            IEmpegCarDatabaseSource source = new HijackDatabaseSource(baseUri);
+            var reader = new EmpegCarDatabaseReader(source);
             var database = reader.ReadDatabase();
+
+            // TODO: For the purposes of this program (for now), we need a flat dump of everything on the player.
+            foreach (var item in database.Items)
+            {
+                Console.WriteLine(item);
+            }
+
+            // TODO: Later, we'll need a heirarchical dump of everything on the player.
+
+            Console.WriteLine(database);
         }
     }
 }

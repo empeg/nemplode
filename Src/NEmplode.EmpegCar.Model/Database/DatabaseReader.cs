@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using NEmplode.EmpegCar.Database;
+using NEmplode.EmpegCar.Database.Sources;
 
 namespace NEmplode.EmpegCar.Model.Database
 {
+#if false
     internal class DatabaseReader : IEmpegDatabaseReader
     {
         private static readonly Dictionary<string, Action<ItemBase, string>> _setters;
@@ -31,32 +34,9 @@ namespace NEmplode.EmpegCar.Model.Database
             _setters["year"] = (i, value) => i.Year = Convert.ToInt32(value);
         }
 
-        private readonly IEmpegDatabaseProvider _databaseProvider;
-
-        public DatabaseReader(IEmpegDatabaseProvider databaseProvider)
-        {
-            _databaseProvider = databaseProvider;
-        }
-
-        public MediaDatabase ReadDatabase()
-        {
-            byte[] tagsBytes = _databaseProvider.DownloadTags();
-
-            // The 'tags' file is ASCII, LF line-endings.
-            var tagsString = Encoding.ASCII.GetString(tagsBytes);
-            var tags = tagsString.Split('\n');
-
-            List<ItemBase> items = ReadDatabase(tags);
-
-            var playlistsBytes = _databaseProvider.DownloadPlaylists();
-
-            // TODO: Put the playlist children in the items.
-            return new MediaDatabase(tags, items);
-        }
-
         private List<ItemBase> ReadDatabase(string[] tags)
         {
-            var databaseBytes = _databaseProvider.DownloadDatabase();
+            var databaseBytes = _databaseSource.DownloadDatabase();
             var databaseStream = new MemoryStream(databaseBytes);
 
             // TODO: Figure this out from the database version.
@@ -79,71 +59,6 @@ namespace NEmplode.EmpegCar.Model.Database
 
             return items;
         }
-
-        private static ItemBase BuildItem(int id, Dictionary<string, string> dictionary)
-        {
-            // OK. We've got the item. Turn it into something a bit more domain-specific.
-            // TODO: Items with id >= 0x100 are required to have a valid type. We should probably enforce that.
-            ItemBase item = null;
-            string type;
-            if (dictionary.TryGetValue("type", out type))
-            {
-                switch (type)
-                {
-                    case "playlist":
-                        item = new PlaylistItem(id);
-                        break;
-                    case "tune":
-                        item = new TuneItem(id);
-                        break;
-                    case "illegal":
-                        // ignore it.
-                        break;
-                    default:
-                        throw new Exception(string.Format("Unrecognised type: {0}", dictionary["type"]));
-                }
-            }
-
-            if (item != null)
-            {
-                foreach (var pair in dictionary)
-                {
-                    Action<ItemBase, string> setter;
-                    if (_setters.TryGetValue(pair.Key, out setter))
-                        setter(item, pair.Value);
-                    else
-                        item.Add(pair.Key, pair.Value);
-                }
-            }
-            return item;
-        }
-
-        private static Dictionary<string, string> ReadItemFields(string[] tags, BinaryReader databaseReader, Encoding encoding)
-        {
-            var dictionary = new Dictionary<string, string>();
-
-            // Loop over the fields.
-            for (; ; )
-            {
-                byte tagIndex = databaseReader.ReadByte();
-                if (tagIndex == 0xFF)
-                    break;
-
-                // TODO: Or we could index the dictionary by tag index and do this later.
-                string tagName = tags[tagIndex];
-                byte tagLength = databaseReader.ReadByte();
-                byte[] tagData = databaseReader.ReadBytes(tagLength);
-
-                string tagValue = encoding.GetString(tagData);
-
-                dictionary.Add(tagName, tagValue);
-
-                // TODO: If we don't find an FF, this item is incorrectly terminated.
-            }
-
-            return dictionary;
-        }
-
         private static TimeSpan ParseDuration(string value)
         {
             long milliseconds = Convert.ToInt64(value);
@@ -159,4 +74,5 @@ namespace NEmplode.EmpegCar.Model.Database
             return result;
         }
     }
+#endif
 }

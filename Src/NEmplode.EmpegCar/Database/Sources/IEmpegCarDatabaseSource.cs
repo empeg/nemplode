@@ -1,6 +1,6 @@
-﻿namespace NEmplode.EmpegCar.Model.Database
+﻿namespace NEmplode.EmpegCar.Database.Sources
 {
-    internal interface IEmpegDatabaseProvider
+    public interface IEmpegCarDatabaseSource
     {
         byte[] DownloadDatabase();
         byte[] DownloadTags();

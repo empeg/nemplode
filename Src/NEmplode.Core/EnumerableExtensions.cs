@@ -1,9 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace NEmplode.Core
 {
     public static class EnumerableExtensions
     {
+        public static void ForEach<T>(this IEnumerable<T> items, Action<T> action)
+        {
+            foreach (var item in items)
+                action(item);
+        }
+
         public delegate bool EqualityComparison<in T>(T x, T y);
 
         public static IEnumerable<T> CommonPrefix<T>(this IEnumerable<T> xs, IEnumerable<T> ys)

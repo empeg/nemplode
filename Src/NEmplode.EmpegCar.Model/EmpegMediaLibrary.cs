@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using NEmplode.EmpegCar.Model.Database;
+using NEmplode.EmpegCar.Database;
+using NEmplode.EmpegCar.Database.Sources;
 using NEmplode.Model;
 
 namespace NEmplode.EmpegCar.Model
@@ -9,13 +10,14 @@ namespace NEmplode.EmpegCar.Model
     [Export(typeof(IMediaLibrary))]
     public class EmpegMediaLibrary : IMediaLibrary
     {
-        private readonly MediaDatabase _database;
+        private readonly EmpegCarDatabase _database;
 
         public EmpegMediaLibrary()
         {
             Uri baseUri = new Uri("http://10.0.0.99/");
 
-            IEmpegDatabaseReader reader = new DatabaseReader(new HijackDatabaseProvider(baseUri));
+            var source = new HijackDatabaseSource(baseUri);
+            var reader = new EmpegCarDatabaseReader(source);
             _database = reader.ReadDatabase();
         }
 
