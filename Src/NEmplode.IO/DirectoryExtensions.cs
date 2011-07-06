@@ -10,9 +10,8 @@ namespace NEmplode.IO
     {
         public static IEnumerable<FileSystemInfo> EnumerateFileSystemEntries<TKey>(this DirectoryInfo directoryInfo, Func<FileSystemInfo, TKey> keySelector)
         {
-            return DescendantExtensions.EnumerateDescendants<FileSystemInfo, TKey>(
+            return DescendantExtensions.EnumerateDescendants<FileSystemInfo>(
                 directoryInfo,
-                keySelector,
                 item => item is DirectoryInfo,
                 item => ((DirectoryInfo)item).EnumerateFileSystemInfos().OrderBy(keySelector));
         }

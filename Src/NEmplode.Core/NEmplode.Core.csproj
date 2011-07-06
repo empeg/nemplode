@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="DescendantExtensions.cs" />
     <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="EnumerableIterator.cs" />
+    <Compile Include="OrderedReconcile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repeat.cs" />
   </ItemGroup>

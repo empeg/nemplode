@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Empeg\EmpegMusicStore.cs" />
+    <Compile Include="Empeg\EmpegSynchronizationItem.cs" />
     <Compile Include="ISynchronizationStore.cs" />
     <Compile Include="LocalMusic\LocalMusicItem.cs" />
     <Compile Include="LocalMusic\LocalMusicStore.cs" />
@@ -54,6 +55,14 @@
     <Compile Include="SynchronizationItem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NEmplode.Core\NEmplode.Core.csproj">
+      <Project>{96C3A2F7-E1F5-4967-ADE9-03AED20CE121}</Project>
+      <Name>NEmplode.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NEmplode.EmpegCar\NEmplode.EmpegCar.csproj">
+      <Project>{0B9D48FA-1B66-4A5E-80EC-F091FD55EFD8}</Project>
+      <Name>NEmplode.EmpegCar</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NEmplode.IO\NEmplode.IO.csproj">
       <Project>{615F54D4-DC17-44E3-B682-04CDDF824937}</Project>
       <Name>NEmplode.IO</Name>

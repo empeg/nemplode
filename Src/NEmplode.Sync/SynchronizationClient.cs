@@ -1,4 +1,5 @@
 using System;
+using NEmplode.Core;
 
 namespace NEmplode.Sync
 {
@@ -19,14 +20,14 @@ namespace NEmplode.Sync
             var sourceItems = _sourceStore.GetCurrentItems();
             var destinationItems = _destinationStore.GetCurrentItems();
 
-            int sourceCount = 0;
-            foreach (var sourceItem in sourceItems)
-            {
-                Console.WriteLine(sourceItem);
-                ++sourceCount;
-            }
+            //int sourceCount = 0;
+            //foreach (var sourceItem in sourceItems)
+            //{
+            //    Console.WriteLine(sourceItem);
+            //    ++sourceCount;
+            //}
 
-            Console.WriteLine("{0:N0} items found in source.", sourceCount);
+            //Console.WriteLine("{0:N0} items found in source.", sourceCount);
 
             int destinationCount = 0;
             foreach (var destinationItem in destinationItems)
@@ -37,7 +38,27 @@ namespace NEmplode.Sync
 
             Console.WriteLine("{0:N0} items found in destination.", destinationCount);
 
+            var mapping = new LocalToEmpegMapping();
+            OrderedReconcile.Reconcile(
+                sourceItems,
+                destinationItems,
+                mapping.Compare,
+                sourceOnly => { Console.WriteLine("Source: {0}", sourceOnly); },
+                destinationOnly => { Console.WriteLine("Destination: {0}", destinationOnly); },
+                (source, destination) => { Console.WriteLine("Both: {0} {1}", source, destination); });
+
             // TODO: Reconcile the two sets.
+        }
+    }
+
+    internal class LocalToEmpegMapping
+    {
+        public int Compare(SynchronizationItem source, SynchronizationItem destination)
+        {
+            var sourceKey = source.GetCompareKey();
+            var destinationKey = destination.GetCompareKey();
+
+            return sourceKey.CompareTo(destinationKey);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace NEmplode.Core
 {
     public static class DescendantExtensions
     {
-        public static IEnumerable<TItem> EnumerateDescendants<TItem, TKey>(TItem rootItem, Func<TItem, TKey> keySelector, Func<TItem, bool> hasChildren, Func<TItem, IEnumerable<TItem>> getChildren)
+        public static IEnumerable<TItem> EnumerateDescendants<TItem>(TItem rootItem, Func<TItem, bool> hasChildren, Func<TItem, IEnumerable<TItem>> getChildren)
         {
             return DescendantsImpl(new[] { rootItem }, hasChildren, getChildren);
         }
@@ -28,6 +28,8 @@ namespace NEmplode.Core
                         while (e.MoveNext())
                         {
                             var current = e.Current;
+
+                            // TODO: Accumulate parents here as well.
                             yield return current;
 
                             if (hasChildren(current))

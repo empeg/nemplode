@@ -45,11 +45,18 @@
     <Compile Include="Database\DatabaseItem.cs" />
     <Compile Include="Database\EmpegCarDatabase.cs" />
     <Compile Include="Database\EmpegCarDatabaseReader.cs" />
+    <Compile Include="Database\EmpegCarPlaylists.cs" />
     <Compile Include="Database\Sources\HijackDatabaseSource.cs" />
     <Compile Include="Database\Sources\IEmpegCarDatabaseSource.cs" />
     <Compile Include="Discovery\EmpegLocator.cs" />
     <Compile Include="Discovery\EmpegObservable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NEmplode.Core\NEmplode.Core.csproj">
+      <Project>{96C3A2F7-E1F5-4967-ADE9-03AED20CE121}</Project>
+      <Name>NEmplode.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
