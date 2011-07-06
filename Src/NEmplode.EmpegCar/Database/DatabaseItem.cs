@@ -14,6 +14,7 @@ namespace NEmplode.EmpegCar.Database
         }
 
         public int Id { get { return _id; } }
+        public string Type { get { return GetValueOrDefault("type"); } }
 
         public string Artist { get { return GetValueOrDefault("artist"); } }
         public string Title { get { return GetValueOrDefault("title"); } }
@@ -32,7 +33,7 @@ namespace NEmplode.EmpegCar.Database
 
         public override string ToString()
         {
-            return string.Format("{0:X}: {1} - {2} - {3} - {4}", Id, Source, TrackNumber, Artist, Title);
+            return string.Format("{0:X} ({1}): {2} - {3} - {4} - {5}", Id, Type, Source, TrackNumber, Artist, Title);
         }
     }
 }

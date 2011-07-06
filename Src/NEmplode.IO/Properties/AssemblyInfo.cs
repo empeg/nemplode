@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NEmplode.EmpegCar.Model")]
+[assembly: AssemblyTitle("NEmplode.IO")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
@@ -20,7 +20,6 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b7c3ec1a-9a6f-467a-b62a-3b9d40f9216b")]
-
+[assembly: Guid("5b982c64-f2cd-46cf-a3dc-b5cdf4c18b6e")]
 [assembly: AssemblyVersion("11.7.6.0")]
 [assembly: AssemblyFileVersion("11.7.6.0")]
